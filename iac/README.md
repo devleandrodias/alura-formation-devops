@@ -1,0 +1,11 @@
+# Commands
+
+> terraform init
+
+> terraform plan
+
+> terraform apply
+
+> ssh -i "iac-alura.pem" ubuntu@ec2-52-54-227-251.compute-1.amazonaws.com
+
+> nohup busybox httpd -f -p 8080 &
