@@ -1,0 +1,13 @@
+name: CI/CD Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Logging
+        run: echo 'Testing GitHub Actions'
