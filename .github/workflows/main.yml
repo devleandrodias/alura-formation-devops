@@ -43,8 +43,20 @@ jobs:
       - name: Test
         run: go test -v main_test.go
 
+      - name: Show path before build
+        run: pwd
+
+      - name: Show files before build
+        run: ls -la
+
       - name: Build
         run: go build -v main.go
+
+      - name: Show path before build
+        run: pwd
+
+      - name: Show files after build
+        run: ls -la
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
