@@ -14,7 +14,7 @@ jobs:
         working-directory: ci-cd
 
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Set up Go
@@ -30,12 +30,15 @@ jobs:
 
       - name: Test
         run: go test -v main_test.go
-  
+
   build:
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ci-cd
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v3
 
       - name: Set up Go
