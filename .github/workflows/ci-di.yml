@@ -11,6 +11,10 @@ on:
     branches:
       - main
 
+defaults:
+  run:
+    working-directory: ci-cd
+
 jobs:
   test:
     name: Test on go ${{ matrix.go_version }}
@@ -25,9 +29,6 @@ jobs:
       matrix:
         go_version: ["1.18", ">=1.19"]
         os: ["ubuntu-latest", "ubuntu-20.04"]
-    defaults:
-      run:
-        working-directory: ci-cd
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -50,9 +51,6 @@ jobs:
     name: Build on Go
     needs: test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ci-cd
     steps:
       - name: Checkout
         uses: actions/checkout@v3
