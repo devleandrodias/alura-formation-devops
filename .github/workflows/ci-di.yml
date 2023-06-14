@@ -49,7 +49,7 @@ jobs:
   build:
     name: Build on Go
     needs: test
-    runs-on: $ubuntu-latest
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ci-cd
