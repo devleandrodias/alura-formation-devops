@@ -52,7 +52,7 @@ jobs:
       - name: Build
         run: go build -v main.go
 
-      - name: Show path before build
+      - name: Show path after build
         run: pwd
 
       - name: Show files after build
@@ -62,7 +62,8 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: api
-          path: ./main
+          path: main
+          if-no-files-found: error
 
   # build:
   #   name: Build on Go
