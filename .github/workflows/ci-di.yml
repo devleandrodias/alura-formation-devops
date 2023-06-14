@@ -11,8 +11,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        go_version: ["1.18", "1.17", ">=1.19"]
-        os: ["ubuntu-latest", "windows-latest", "ubuntu-latest"]
+        go_version: ["1.18", ">=1.19"]
+        os: ["ubuntu-latest", "ubuntu-20.04"]
     defaults:
       run:
         working-directory: ci-cd
@@ -36,7 +36,7 @@ jobs:
 
   build:
     needs: test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     defaults:
       run:
         working-directory: ci-cd
