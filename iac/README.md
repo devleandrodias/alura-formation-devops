@@ -13,3 +13,5 @@
 > nohup busybox httpd -f -p 8080 &
 
 > ansible-playbook playbook.yml -u ubuntu --private-key iac-alura.pem -i hosts.yml
+
+> ssh-keygen
