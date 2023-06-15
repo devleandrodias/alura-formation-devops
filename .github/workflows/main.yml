@@ -17,7 +17,7 @@ defaults:
 
 jobs:
   test:
-    name: Test on using Go v${{ matrix.go_version }}
+    name: Test on using Go ${{ matrix.go_version }}
     runs-on: ${{ matrix.os }}
     env:
       HOST: localhost
@@ -65,6 +65,6 @@ jobs:
           path: ci-cd/main
 
   docker:
-    needs: test
+    needs: build
     uses: ./.github/workflows/Docker.yml
     secrets: inherit
