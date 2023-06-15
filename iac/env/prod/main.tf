@@ -5,3 +5,7 @@ module "aws_prod" {
   ssh_key_name = "IaC-Prod"
   instance_type = "t2.micro"
 }
+
+output "prod_public_ip" {
+  value = module.aws_prod.public_ip
+}
