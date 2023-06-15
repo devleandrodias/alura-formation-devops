@@ -6,6 +6,6 @@ module "aws_prod" {
   instance_type = "t2.micro"
 }
 
-output "prod_public_ip" {
+output "public_ip" {
   value = module.aws_prod.public_ip
 }

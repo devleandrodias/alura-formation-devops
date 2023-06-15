@@ -13,13 +13,12 @@
         repo: https://github.com/alura-cursos/clientes-leo-api.git
         dest: /home/ubuntu/tcc
         version: master
+        force: yes
 
     - name: installing dependencies with pip
       pip:
         virtualenv: /home/ubuntu/tcc/venv
-        name:
-          - django
-          - djangorestframework
+        requirements: /home/ubuntu/tcc/requirements.txt
 
     - name: changing allowed host on setting file
       lineinfile:
@@ -27,3 +26,12 @@
         regexp: "ALLOWED_HOSTS"
         line: "ALLOWED_HOSTS = ['*']"
         backrefs: yes
+
+    - name: configuring database
+      shell: ". /home/ubuntu/tcc/venv/bin/activate; python /home/ubuntu/tcc/manage.py migrate"
+
+    - name: running seed
+      shell: ". /home/ubuntu/tcc/venv/bin/activate; python /home/ubuntu/tcc/manage.py loaddata clientes.json"
+
+    - name: starting server
+      shell: ". /home/ubuntu/tcc/venv/bin/activate; nohup python /home/ubuntu/tcc/manage.py runserver 0.0.0.0:8000 &"
