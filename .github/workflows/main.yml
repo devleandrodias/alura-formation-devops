@@ -17,14 +17,18 @@ defaults:
 
 jobs:
   test:
-    name: Test on Go
-    runs-on: ubuntu-latest
+    name: Test on using Go v${{ matrix.go_version }}
+    runs-on: ${{ matrix.os }}
     env:
       HOST: localhost
       PORT: 5432
       USER: root
       PASSWORD: root
       DBNAME: root
+    strategy:
+      matrix:
+        go_version: ["1.18", "<=1.19"]
+        os: ["ubuntu-latest", "ubuntu-20.04"]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -43,44 +47,22 @@ jobs:
       - name: Test
         run: go test -v main_test.go
 
-      - name: Show path before build
-        run: pwd
-
-      - name: Show files before build
-        run: ls -la
+  build:
+    name: Build on Go
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Build
         run: go build -v main.go
-
-      - name: Show path after build
-        run: pwd
-
-      - name: Show files after build
-        run: ls -la
 
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3
         with:
           name: api
           path: ci-cd/main
-          if-no-files-found: error
-
-  # build:
-  #   name: Build on Go
-  #   needs: test
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Build
-  #       run: go build -v main.go
-
-  #     - name: Upload a Build Artifact
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: api
-  #         path: ./main
 
   docker:
     needs: test
